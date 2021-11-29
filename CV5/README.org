@@ -1,0 +1,134 @@
+#+TITLE: Dydu Bliss
+#+AUTHOR: Dydu
+
+* Installation
+
+Copy the bot configuration sample files 
+Fill both the =id= and the =server= keys with a bot of your choice in public/override/bot.json.
+
+#+BEGIN_SRC sh
+cp public/override/bot.json.sample => public/override/bot.json
+cp public/override/configuration.json.sample => public/override/configuration.json
+cp public/override/style.css.sample => public/override/style.css
+cp public/override/theme.json.sample => public/override/theme.json
+#+END_SRC
+
+A token is needed to install some dependencies like voice-module, ask for it.
+#+BEGIN_SRC sh
+export NPM_TOKEN=XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+#+END_SRC
+
+Run this command to login to Nexus to use private dydu libs. Ask for your Nexus id and password.
+#+BEGIN_SRC sh
+npm login --registry https://nexus.doyoudreamup.com/repository/npm-private/
+#+END_SRC
+
+The below instructions assume you have a working setup with latest =npm=.
+
+#+BEGIN_SRC sh
+npm install
+npm install @dydu_ai/voice-module --no-save //optional if you use voice-module
+npm start
+#+END_SRC
+
+* Contributing
+
+** Setup
+Install the following dependencies globally when working outside of =npm=. This
+lets your editor know about ESLint dependencies.
+
+#+BEGIN_SRC emacs-lisp
+npm install -g babel-eslint eslint eslint-plugin-react
+#+END_SRC
+
+** Branches
+
+Namespace branches according to their content. Use kebab-case to name branches.
+
+- =build=    :: Build-related augments
+- =docs=     :: Documentation
+- =feat=     :: Enhancements
+- =fix=      :: Bug fixes
+- =refactor= :: Logic cleanup
+- =style=    :: Syntax cleanup
+- =test=     :: Tests
+
+Do not push directly to =:master= or =:development=,
+Use feature branches and merge them into =:development= instead.
+
+** Commit Changes
+
+Make sure the code you stage to commit passes ESLint before committing. There's
+a pre-commit hook that won't let your pass through in the presence of ESLint
+errors or a malformed commit message.
+
+[[http://www.commitstrip.com/en/2012/03/06/pre-commit-hook-irl/][http://www.commitstrip.com/wp-content/uploads/2012/03/Strip-SVN-English800-final.jpg]]
+
+Use English in your commit messages.
+
+Rules about committing:
+Start with a verb (fix, refacto, feat etc), then main, then number of ticket, then describe what your are doing in a short message.
+example: fix(main): #RDA-9999 fix component
+
+
+** Pushing Changes
+
+1. Pull =:development= into a new branch with the corresponding prefix eg. =:namespace/123/your-feature=
+1. Push your code to your branch
+1. Pull =:development= in your branch again
+1. Wait for the merge :-)
+
+Repeat steps 3 and 4 as often as necessary. Having your feature branches up to
+date with =:development= is paramount.
+
+** Deploying to Production
+
+/This is the current workflow. Subject to change later./
+
+To deploy to the =:master= branch, merge from =:development= only.
+
+First, merge the feature branches into =:development=.
+
+1. Checkout the feature branch
+1. Review the changes
+1. Checkout =:development=
+1. Pull to ensure your local copy of the branch is up to date
+1. Merge the feature branch
+1. Bump the version: =npm version patch|minor=
+1. Push the changes
+1. git push origin <version>
+
+Then merge into =:master=.
+
+1. Checkout =:master=
+1. Pull to ensure your local copy of the branch is up to date
+1. Merge =:development= without merging the files in override folder
+1. Push the changes
+
+** Deploying to CDN
+1. There is automatic deployment of development branch on https://cdn.doyoudreamup.com/ in preprod when new changes are pushed to development branch.
+1. Development branch in preprod: https://cdn.doyoudreamup.com/development/preprod/index.html
+1. Development branch in prod: https://cdn.doyoudreamup.com/development/prod/index.html
+
+** Project branches
+1. For new client projects, create a new branch named project/name_of_project from development branch.
+2. Complete the configuration in the override folder files.
+3. Push your changes in your branch.
+
+## List of avalaible Bots to test
+
+```
+{
+  "id": "f1871fe8-cdea-4695-9ea6-529a4e9460dc",
+  "server": "dev.mercury.doyoudreamup.com",
+  "backUpServer": ""
+}
+```
+
+```
+{
+  "id": "87d5600b-9b64-4599-8ff2-80cf545803ea",
+  "server": "app1.self1.doyoudreamup.com",
+  "backUpServer": ""
+}
+```

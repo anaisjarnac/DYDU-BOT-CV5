@@ -1,0 +1,42 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:react/recommended"
+  ],
+  "globals": {
+    "__dirname": false,
+    "module": false,
+    "process": false,
+    "require": false
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["import", "react", "react-hooks"],
+  "rules": {
+    "keyword-spacing": "warn",
+    "no-empty": ["warn", { "allowEmptyCatch": true }],
+    "no-eval": ["warn", { "allowIndirect": true }],
+    "no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
+    "react/no-children-prop": 0,
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "warn"
+  },
+  "settings": {
+    "import/core-modules": ["rsg-components/Styled"],
+    "react": {
+      "version": "17"
+    }
+  }
+}
